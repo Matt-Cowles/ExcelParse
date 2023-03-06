@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ExcelReadWrite
@@ -10,14 +11,17 @@ namespace ExcelReadWrite
             InitializeComponent();
         }
 
+        public static string filePath = "";
+
+
         private void readBtn_Click(object sender, EventArgs e)
         {
-            readFile();
+            readData();
         }
 
-        private void readFile()
+        private void readData()
         {
-            string filePath = "C:\\Users\\Matt\\OneDrive\\Documents\\PC Parts.xlsx";
+            //string filePath = "C:\\Users\\Matt\\OneDrive\\Documents\\PC Parts.xlsx";
             Excel.Application excel = new Excel.Application();
             Excel.Workbook wb;
             Excel.Worksheet ws;
@@ -42,6 +46,19 @@ namespace ExcelReadWrite
         private void writeData()
         {
 
+        }
+
+        private void openFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            ofd.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
+
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                filePath = (ofd.FileName);
+                filePathText.Text = ofd.FileName;
+            }
         }
     }
 }
